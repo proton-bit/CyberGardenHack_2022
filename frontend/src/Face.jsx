@@ -15,7 +15,7 @@ import * as cam from "@mediapipe/camera_utils";
 import { drawConnectors } from "@mediapipe/drawing_utils";
 import Webcam from "react-webcam";
 import './App.css';
-import "./components/toggle.css";
+import "./components/style.css";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -154,7 +154,6 @@ function Face() {
 
       const videoWidth = webcamRef.current.video.videoWidth;
       const videoHeight = webcamRef.current.video.videoHeight;
-      checking(person_exists);
       // Set canvas width
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
@@ -282,7 +281,7 @@ function Face() {
           );
         };
         
-        setCheck("Вырубил, списывай")
+        setCheck("disabled")
       }
     }
 
@@ -302,9 +301,6 @@ function Face() {
           <tr> 
             <td className="td1"> 
               <a>all time</a> 
-            </td> 
-            <td className="td1"> 
-              <a >time remaining</a> 
             </td> 
             <td className="td1"> 
               <a>time skipped</a> 
@@ -400,7 +396,7 @@ function Face() {
             <Form.Control type="login" placeholder="ФИО" name="name"/>
           </Form.Group>
           <input type="text" name="presence" value={dieTime} style={{opacity: 0,}}></input>
-          <Button variant="secondary" type="submit">
+          <Button variant="dark" type="submit">
             Submit
           </Button>
         </Form>
