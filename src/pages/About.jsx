@@ -17,7 +17,7 @@ function About() {
         Данный продукт разработан командой MISIShunters и призван облегчить рутинный процесс отслеживания посещаемости студентов на занятиях как для преподавателей, так и для самих учащихся. 
         <br /> 
         <a href="https://t.me/MomIamOnLessonBot" target="_blank" draggable="false" display="false"> 
-          <img src="tg_logo.svg" className="logo " draggable="false" width="100px" float="left" /> 
+          <img src="/static/tg_logo.svg" className="logo " draggable="false" width="100px" float="left" /> 
         </a> 
       </div> 
       <table className="table1"> 

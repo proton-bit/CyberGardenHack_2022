@@ -93,19 +93,11 @@ function Face() {
   const [dieTime, setDieTime] = useState(5);
   const [check, setCheck] = useState("disabled");
 
-  const [isActive, setIsActive] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-
-
   const handleStart = () => {
     if (aiEnabled) {
       if (incrementRef.current) clearInterval(incrementRef.current);
       setTimer(0);
-      setIsActive(false)
-      setIsPaused(false)
     } else {
-      setIsActive(true)
-      setIsPaused(true)
       incrementRef.current = setInterval(() => {
         setTimer((timer) => timer + 1)
       }, 1000)
@@ -130,7 +122,6 @@ function Face() {
     if (a) {
       setTimePersonLeft(0);
 
-
     }
   }
 
@@ -138,6 +129,9 @@ function Face() {
 
   function checking(person_detected) {
     person_detected ? setCheck("✅") : setCheck("❌"); 
+    if (dieTime <= 0){
+      setDieTime("Time Over...")
+    }
   }
 
   const formatTime = (timers) => {
@@ -197,7 +191,7 @@ function Face() {
             }
           }
           // console.log(draww)
-          // setTimePersonLeft(0);
+          setTimePersonLeft(0);
           date_person_here = new Date();
         } else {
           time_person_left = new Date() - date_person_here
@@ -216,6 +210,7 @@ function Face() {
         inc(msToSec(time_person_left));
         dec(msToSec(time_person_left));
         checking(person_exists);
+        nul(person_exists);
 
 
       }
@@ -255,8 +250,8 @@ function Face() {
           onFrame: async () => {
             await faceMeshRef.current.send({ image: webcamRef.current.video });
           },
-          width: 480,
-          height: 640,
+          width: 640,
+          height: 480,
         });
         camera.start();
         cameraRef.current = camera;
@@ -317,7 +312,10 @@ function Face() {
           <tr> 
             <td className="td1"> 
               <a>{formatTime(timer)}</a> 
-            </td >  
+            </td > 
+            <td className="td1"> 
+              <a>{dieTime}</a> 
+            </td> 
             <td className="td1"> 
               <a>{formatTime(timePersonLeft)}</a> 
             </td> 
@@ -341,8 +339,8 @@ function Face() {
             opacity: 100, 
             textAlign: "center", 
             zIndex: 9, 
-            width: 480, 
-            height: 640, 
+            width: 960, 
+            height: 720, 
             borderRadius: 10, 
           }} 
         /> 
@@ -360,8 +358,8 @@ function Face() {
             opacity: 100, 
             textAlign: "center", 
             zIndex: 9, 
-            width: 480, 
-            height: 640, 
+            width: 960, 
+            height: 720, 
             borderRadius: 10, 
           }} 
         /> 
@@ -377,17 +375,9 @@ function Face() {
             marginBottom: "10px" 
           } 
         }> 
-             {
-            !isActive && !isPaused ?
-            <Button variant="dark" style={{ 
-              fontSize: '40px', width: 300, 
-            }} onClick={handleStart}>Start</Button> 
-              : (
-                <Button variant="dark" style={{ 
-                  fontSize: '40px', width: 300, 
-                }} onClick={handleStart}>Stop</Button> 
-              )
-          }
+          <Button variant="dark" style={{ 
+            fontSize: '40px', width: 300, 
+          }} onClick={handleStart}>Start</Button> 
  
           <div 
             style={{ 
